@@ -54,3 +54,7 @@ abstract class CounterEvent {
 class IncrementEvent extends CounterEvent {
   const IncrementEvent(String value) : super(value);
 }
+
+class DecrementEvent extends CounterEvent {
+  const DecrementEvent(String value) : super(value);
+}
