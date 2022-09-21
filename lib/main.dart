@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,4 +43,10 @@ class CounterStateInvalidNumber extends CounterState {
     required this.invalidNumber,
     required int previousValue,
   }) : super(previousValue);
+}
+
+@immutable
+abstract class CounterEvent {
+  final String value;
+  const CounterEvent(this.value);
 }
