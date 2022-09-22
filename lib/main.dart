@@ -37,7 +37,51 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter'),
+        ),
+        body: BlocConsumer<CounterBloc, CounterState>(
+          listener: (context, state) {
+            _controller.clear();
+          },
+          builder: (context, state) {
+            final invalidValue =
+                (state is CounterStateInvalidNumber) ? state.invalidNumber : '';
+            return Column(
+              children: [
+                const SizedBox(height: 2),
+                Text(
+                  'Current value: ${state.value}',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Visibility(
+                  child: Text('Invalid input: $invalidValue',
+                      style: Theme.of(context).textTheme.headline6),
+                  visible: state is CounterStateInvalidNumber,
+                ),
+                TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    labelText: 'Enter a number',
+                    errorText: invalidValue,
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.read<CounterBloc>().add(IncrementEvent(''));
+          },
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
   }
 }
 
