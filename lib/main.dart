@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +61,35 @@ class DecrementEvent extends CounterEvent {
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(const CounterStateValid(0)) {
-    on<IncrementEvent>(((event, emit) {}));
-    on<DecrementEvent>(((event, emit) {}));
+    on<IncrementEvent>(((event, emit) {
+      final interger = int.tryParse(event.value);
+      if (interger != null) {
+        emit(
+          CounterStateInvalidNumber(
+            invalidNumber: event.value,
+            previousValue: state.value,
+          ),
+        );
+      } else {
+        emit(
+          CounterStateValid(state.value + interger!),
+        );
+      }
+    }));
+    on<DecrementEvent>(((event, emit) {
+      final interger = int.tryParse(event.value);
+      if (interger != null) {
+        emit(
+          CounterStateInvalidNumber(
+            invalidNumber: event.value,
+            previousValue: state.value,
+          ),
+        );
+      } else {
+        emit(
+          CounterStateValid(state.value - interger!),
+        );
+      }
+    }));
   }
 }
