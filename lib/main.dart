@@ -73,24 +73,26 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Add'),
+                      onPressed: () {
+                        context
+                            .read<CounterBloc>()
+                            .add(DecrementEvent(_controller.text));
+                      },
+                      child: const Text('+'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Subtract'),
+                      onPressed: () {
+                        context
+                            .read<CounterBloc>()
+                            .add(IncrementEvent(_controller.text));
+                      },
+                      child: const Text('-'),
                     ),
                   ],
                 )
               ],
             );
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.read<CounterBloc>().add(IncrementEvent(''));
-          },
-          child: const Icon(Icons.add),
         ),
       ),
     );
