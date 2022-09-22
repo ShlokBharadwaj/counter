@@ -1,5 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,4 +57,11 @@ class IncrementEvent extends CounterEvent {
 
 class DecrementEvent extends CounterEvent {
   const DecrementEvent(String value) : super(value);
+}
+
+class CounterBloc extends Bloc<CounterEvent, CounterState> {
+  CounterBloc() : super(const CounterStateValid(0)) {
+    on<IncrementEvent>(((event, emit) {}));
+    on<DecrementEvent>(((event, emit) {}));
+  }
 }
