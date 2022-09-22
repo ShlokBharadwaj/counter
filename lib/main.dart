@@ -70,6 +70,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                   keyboardType: TextInputType.number,
                 ),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Add'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Subtract'),
+                    ),
+                  ],
+                )
               ],
             );
           },
