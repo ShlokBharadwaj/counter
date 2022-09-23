@@ -9,7 +9,7 @@ void main() {
       primarySwatch: Colors.deepPurple,
     ),
     home: const HomePage(),
-    // darkTheme: ThemeData.dark(),
+    darkTheme: ThemeData.dark(),
   ));
 }
 
