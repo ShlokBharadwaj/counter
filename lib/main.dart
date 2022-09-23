@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
-    title: 'No Notes',
+    title: 'Counter',
     theme: ThemeData(
       primarySwatch: Colors.deepPurple,
     ),
