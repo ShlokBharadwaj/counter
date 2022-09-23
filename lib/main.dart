@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           },
           builder: (context, state) {
             final invalidValue =
-                (state is CounterStateInvalidNumber) ? state.invalidNumber : '';
+                (state is CounterStateInvalidNumber) ? state.invalidValue : '';
             return Column(
               children: [
                 const SizedBox(height: 2),
@@ -64,9 +64,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextField(
                   controller: _controller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Enter a number',
-                    errorText: invalidValue,
                   ),
                   keyboardType: TextInputType.number,
                 ),
@@ -78,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                             .read<CounterBloc>()
                             .add(DecrementEvent(_controller.text));
                       },
-                      child: const Text('+'),
+                      child: const Text('-'),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                             .read<CounterBloc>()
                             .add(IncrementEvent(_controller.text));
                       },
-                      child: const Text('-'),
+                      child: const Text('+'),
                     ),
                   ],
                 )
@@ -110,9 +109,9 @@ class CounterStateValid extends CounterState {
 }
 
 class CounterStateInvalidNumber extends CounterState {
-  final String invalidNumber;
+  final String invalidValue;
   const CounterStateInvalidNumber({
-    required this.invalidNumber,
+    required this.invalidValue,
     required int previousValue,
   }) : super(previousValue);
 }
@@ -135,31 +134,31 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(const CounterStateValid(0)) {
     on<IncrementEvent>(((event, emit) {
       final interger = int.tryParse(event.value);
-      if (interger != null) {
+      if (interger == null) {
         emit(
           CounterStateInvalidNumber(
-            invalidNumber: event.value,
+            invalidValue: event.value,
             previousValue: state.value,
           ),
         );
       } else {
         emit(
-          CounterStateValid(state.value + interger!),
+          CounterStateValid(state.value + interger),
         );
       }
     }));
     on<DecrementEvent>(((event, emit) {
       final interger = int.tryParse(event.value);
-      if (interger != null) {
+      if (interger == null) {
         emit(
           CounterStateInvalidNumber(
-            invalidNumber: event.value,
+            invalidValue: event.value,
             previousValue: state.value,
           ),
         );
       } else {
         emit(
-          CounterStateValid(state.value - interger!),
+          CounterStateValid(state.value - interger),
         );
       }
     }));
