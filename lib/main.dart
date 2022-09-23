@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                   keyboardType: TextInputType.number,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
                       onPressed: () {
