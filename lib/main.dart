@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Counter'),
+          centerTitle: true,
         ),
         body: BlocConsumer<CounterBloc, CounterState>(
           listener: (context, state) {
